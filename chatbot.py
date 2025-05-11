@@ -1,9 +1,10 @@
 from openai import OpenAI
 import gradio as gr
 import docx
+import os
 
 # Set up Open AI API key
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="Your API key")
 
 # Read Word file
 try:
