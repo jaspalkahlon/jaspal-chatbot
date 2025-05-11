@@ -3,8 +3,8 @@ import gradio as gr
 import docx
 import os
 
-# Set up Open AI API key
-client = OpenAI(api_key="Your API key")
+# Set up Open AI API key from environment variable
+client = OpenAI(api_key=os.getenv("OPENAI_APsk-proj-szmRdlpC6YCaVpM-COgeKoIBU4F6ldza3zuM0U1gjIjexkbSnh0Ip-7wIC4d7IOdBlw37x5397T3BlbkFJ2prY3yysKP3qEiLHCEifI5d6SEUI143bjJgGRbdYdsaolCj1Wu318ty0sIBV2oBeB3o-6qq1kA"))
 
 # Read Word file
 try:
@@ -92,5 +92,6 @@ with gr.Blocks(css=css) as interface:
     user_input = gr.Textbox(placeholder="Type your message here...", label="Message")
     user_input.submit(chat, inputs=user_input, outputs=[chatbot, user_input])
 
-# Launch the chatbot
-interface.launch()
+# Launch the chatbot, binding to 0.0.0.0 and the PORT environment variable
+port = int(os.getenv("PORT", 7860))  # Use Render's PORT or default to 7860 locally
+interface.launch(server_name="0.0.0.0", server_port=port)
